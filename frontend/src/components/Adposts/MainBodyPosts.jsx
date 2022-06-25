@@ -8,28 +8,41 @@ export default function MainBodyPosts(props) {
 
   useEffect(() => {
     const fetchPosts = async () => {
+      let response = Promise.resolve();
       if(props.category === 'All'){
-        const response = await fetch('http://localhost:4000/ad-api/getAds');
+        if(props.filter.sort === 'clear'){
+          response = await fetch('http://localhost:4000/ad-api/getAds/sort/clear');
+        } else if(props.filter.sort === 'inc') {
+          response = await fetch('http://localhost:4000/ad-api/getAds/sort/inc');
+        } else {
+          response = await fetch('http://localhost:4000/ad-api/getAds/sort/dec');
+        }
         const allPosts = await response.json();
         setPosts(allPosts);
       } else {
-        const response = await fetch('http://localhost:4000/ad-api/getAds/category/' + props.category);
+        if(props.filter.sort === 'clear'){
+          response = await fetch('http://localhost:4000/ad-api/getAds/category/' + props.category + '/sort/clear');
+        } else if(props.filter.sort === 'inc') {
+          response = await fetch('http://localhost:4000/ad-api/getAds/category/' + props.category + '/sort/inc');
+        } else {
+          response = await fetch('http://localhost:4000/ad-api/getAds/category/' + props.category + '/sort/dec');
+        }
         const categoricalPosts = await response.json();
         setPosts(categoricalPosts);
       }
     }
     fetchPosts();
-  }, [props.category]);
+  }, [props.category, props.filter.sort]);
 
   return (
     <div className={classes.Supreme}>
       <p className={classes.para}>Fresh Recomendations</p>
       <div className={classes.Adposts}>
         
-        {posts && posts.map(post => <PostCard post={post} key={post._id} />)}
+        {posts && posts.filter(post => (post.price >= props.filter.min_price && post.price <= props.filter.max_price)).map(post => <PostCard post={post} key={post._id} />)}
         {posts ? null : <div>No Ads in this category</div>}
 
       </div>
     </div>
-  )
+  );
 };
