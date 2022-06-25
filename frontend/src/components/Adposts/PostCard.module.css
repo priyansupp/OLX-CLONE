@@ -1,0 +1,56 @@
+.posts{
+    flex:20%;
+    margin:20px;
+    min-height: 340px;
+    min-width: 300px;
+    position: relative;
+    cursor: pointer;
+    border-radius: 10px;
+    border: 2px solid rgba(208, 208, 208, 0.434);
+    box-shadow: 4px 4px rgb(195, 195, 195);
+}
+
+.image{
+    position: absolute;
+    top:10px;
+    left: 5%;
+    width: 90%;
+    max-height: 70%;
+    object-fit: cover;
+}
+
+.price{
+    position: absolute;
+    bottom:30px;
+    left:30px;
+    font-size: 25px;
+    font-weight: bold;
+}
+
+.dateOfBuying{
+    position: absolute;
+    bottom: 18px;
+    left: 30px;
+}
+
+.pro_name{
+    position: absolute;
+    bottom: 10px;
+    right: 20px;
+    color: rgb(59, 59, 59);
+    font-size: 40px;
+}
+
+.desc{
+    position: absolute;
+    bottom: -10px;
+    right: 20px;
+    color: rgb(59, 59, 59);
+}
+
+.hostel{
+    position: absolute;
+    bottom: -10px;
+    left: 20px;
+    color: rgb(59, 59, 59);
+}

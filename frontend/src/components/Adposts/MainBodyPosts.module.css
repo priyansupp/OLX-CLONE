@@ -1,0 +1,12 @@
+.Adposts{
+    display: flex;
+    flex-wrap: wrap;
+    position: relative;
+}
+.para{
+  margin-top: 0px; 
+  margin-bottom: 0px;
+  margin-left: 40px;
+  font-size: 40px;
+  color: rgb(69, 68, 68);
+}

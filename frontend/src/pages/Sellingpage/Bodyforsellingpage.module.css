@@ -1,0 +1,76 @@
+.main {
+    background-color: #5393b8;
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.image{
+    background-color: #0d0d0d;
+    padding: 20px;
+    text-align: center;
+}
+
+.form {
+    margin: 20px;
+    color: #eee;
+}
+
+.form label {
+    font-size: 18px;
+    letter-spacing: 0.1em;
+}
+
+.input[type="checkbox"]{
+    opacity: 0;
+    margin: 0;
+    width: 0;
+}
+
+label[for="Negotiation"]{
+    display: inline-block;
+    margin-bottom: 10px;
+    padding-left: 25px;
+    background: url(../../assests/checks.png) no-repeat;
+    background-position: 0 -98px;
+    line-height: 24px;
+    cursor: pointer;
+}
+
+.input:checked + label[for="Negotiation"] {
+    background-position: 0 -65px;
+    color: #e74513;
+}
+
+.submit, .reset{
+    background: #10ce49;
+    padding: 15px;
+    margin-left: 50px;
+    color: #fff;
+    height: 50px;
+    font-size: 20px;
+    letter-spacing: 0.1em;
+    border-radius: 4px;
+    border: 0;
+    box-shadow: 1px 3px 5px rgba(0, 0, 0, 0,5);
+    width: 200px;
+    transition: 10ms;
+    cursor: pointer;
+}
+
+.submit:hover, .reset:hover{
+    transform: translateY(-2px);
+    color: #000000;
+}
+
+.input[type="number"]:valid{
+    border: 2px solid #10ce49;
+}
+
+.title {
+    color: rgb(255, 230, 0);
+    font-size: 30px;
+    letter-spacing: 0.1em;
+    position: relative;
+    left: 20px;
+}
+
