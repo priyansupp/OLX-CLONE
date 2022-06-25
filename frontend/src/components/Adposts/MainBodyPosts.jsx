@@ -8,12 +8,18 @@ export default function MainBodyPosts(props) {
 
   useEffect(() => {
     const fetchPosts = async () => {
-      const response1 = await fetch('http://localhost:4000/ad-api/getAds');
-      const allPosts = await response1.json();
-      setPosts(allPosts);
+      if(props.category === 'All'){
+        const response = await fetch('http://localhost:4000/ad-api/getAds');
+        const allPosts = await response.json();
+        setPosts(allPosts);
+      } else {
+        const response = await fetch('http://localhost:4000/ad-api/getAds/category/' + props.category);
+        const categoricalPosts = await response.json();
+        setPosts(categoricalPosts);
+      }
     }
     fetchPosts();
-  }, []);
+  }, [props.category]);
 
   return (
     <div className={classes.Supreme}>
@@ -21,6 +27,7 @@ export default function MainBodyPosts(props) {
       <div className={classes.Adposts}>
         
         {posts && posts.map(post => <PostCard post={post} key={post._id} />)}
+        {posts ? null : <div>No Ads in this category</div>}
 
       </div>
     </div>

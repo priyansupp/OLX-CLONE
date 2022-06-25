@@ -4,6 +4,13 @@ import { useFormik } from "formik";
 
 
 const Bodyforsellingpage = () => {
+
+    const validate = values => {
+        const errors = {};
+        if(!values.category){
+            errors.category = 'Category is required';
+        }
+    }
     
     const formik = useFormik({          // the useFormik hook takes in object and returns object.
         initialValues: {
@@ -13,11 +20,12 @@ const Bodyforsellingpage = () => {
             dateOfBuying: "",
             myFile: "",
             description: "",
-            hostel: "",
-            negotiable: ""
+            hostel: "Siang Hostel",
+            negotiable: false
         },
+        validate,
         onSubmit: (values) => {
-            // console.log(typeof values);
+            console.log(values);
             fetch('http://localhost:4000/ad-api/postAd', {
                 method: "POST",
                 headers: {
@@ -66,10 +74,12 @@ const Bodyforsellingpage = () => {
                             <option value="Mobiles">Mobile Phones</option>
                             <option value="Laptops">Laptops of all type</option>
                             <option value="Cycles">Cycles of all type</option>
+                            <option value="Books">Books across all academic year</option>
                             <option value="Mattresses">Mattresses</option>
                             <option value="Others">Others(please specify)</option>
                         </datalist>
                     </div>
+                    {formik.errors.category ? <div>{formik.errors.category}</div> : null}
                     <div>
                         <label htmlFor='Name'>Product Name : </label>
                         <input 
@@ -115,13 +125,11 @@ const Bodyforsellingpage = () => {
                         value={formik.values.myFile}/>
                     </div>
                     <div>
-                        <label className={classes.criteria5} htmlFor='hostel'>Select your hostel : </label>
+                        <label htmlFor='hostel'>Select your hostel : </label>
                         <select
                             className={classes.input}
                             id='hostel'
                             name='hostel'
-                            type="text"
-                            required
                             onChange={formik.handleChange}
                             value={formik.values.hostel}>
                             <option value="Siang Hostel">Siang Hostel</option>

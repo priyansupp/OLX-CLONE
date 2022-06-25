@@ -11,8 +11,8 @@ router.get('/getAds/id/:id', (req, res) => {
         if(err){
             console.log(err);
         } else{
+            // console.log(ad);
             res.send(ad);
-            console.log(ad);
         }
     })
 }); 
@@ -23,7 +23,7 @@ router.get('/getAds/category/:category', (req, res) => {
         if(err){
             console.log("this is category error : ", err);
         } else {
-            console.log(ads);
+            // console.log(ads);
             res.send(ads);
         }
     });
