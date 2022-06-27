@@ -124,12 +124,14 @@
     font-size: 1.8rem;
     margin-top: 0;
     margin-bottom: 0;
+    color: green;
 }
 
 .notNego {
     font-size: 1.8rem;
-    margin-top: 0;
+    margin-top: 0; 
     margin-bottom: 0;
+    color: red;
 }
 
 .hostel {
@@ -148,6 +150,7 @@
     font-size: 1.2rem;
     margin-top: 0;
     margin-bottom: 0;
+    color: rgb(55, 55, 55);
 }
 
 /*-----about seller-----*/
