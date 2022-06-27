@@ -1,8 +1,7 @@
 
 /* Dropdown Button */
 .dropbtn {
-  background-color: #04AA6D;
-  color: white;
+  color: black;
   padding: 5px;
   font-size: 16px;
   border: none;
@@ -13,7 +12,6 @@
 .dropdown {
   position: relative;
   display: inline-block;
-  left: 650px;
 }
 
 /* Dropdown Content (Hidden by Default) */

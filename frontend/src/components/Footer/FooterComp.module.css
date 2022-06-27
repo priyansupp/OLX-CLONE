@@ -33,3 +33,18 @@
 .fa:hover{
     text-decoration: underline;
 }
+
+
+@media only screen and (max-width: 610px) {
+.FooterComp{
+    flex-direction: column;
+} 
+
+.FooterComp > *{
+    width: 90%;
+}
+
+.head{
+    margin: 10px 0px;
+}
+}
