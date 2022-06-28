@@ -1,7 +1,6 @@
 import classes from './Modal.module.css';
-import Card from '../UserInterface/Card';
+import Card from './Card';
 import { Link } from 'react-router-dom';
-import { useState } from 'react';
 
 function Modal(props){
     const SignInviaMicro = () => {

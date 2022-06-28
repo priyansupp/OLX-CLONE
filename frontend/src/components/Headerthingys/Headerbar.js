@@ -5,21 +5,85 @@ import logo from "../../assests/Logo.png";
 import search from "../../assests/SearchIcon.png";
 import plus from "../../assests/plus.png";
 import Profile from "../Profilethingys/Profile";
-import Modal from "../Loginthingys/Modal";
-import Backdrop from "../UserInterface/Backdrop";
 import { useState } from 'react';
+import { useIsAuthenticated } from "@azure/msal-react";
+import { Logout } from "../Loginthingys/Logout";
+import { AuthenticatedTemplate, UnauthenticatedTemplate, useMsal } from "@azure/msal-react";
+import { loginRequest } from "../../configs/authConfigs";
+import { ProfileData } from "../Loginthingys/ProfileData";
+import { callMsGraph } from "../Loginthingys/graph";
+
+// function ProfileContent() {
+//     const { instance, accounts, inProgress } = useMsal();
+//     const [accessToken, setAccessToken] = useState(null);
+
+//     const name = accounts[0] && accounts[0].name;
+
+//     function RequestAccessToken() {
+//         const request = {
+//             ...loginRequest,
+//             account: accounts[0]
+//         };
+
+//         // Silently acquires an access token which is then attached to a request for Microsoft Graph data
+//         instance.acquireTokenSilent(request).then((response) => {
+//             setAccessToken(response.accessToken);
+//         }).catch((e) => {
+//             instance.acquireTokenPopup(request).then((response) => {
+//                 setAccessToken(response.accessToken);
+//             });
+//         });
+//     }
+
+//     return (
+//         <>
+//             <h5 className="card-title">Welcome {name}</h5>
+//             {accessToken ? 
+//                 <p>Access Token Acquired!</p>
+//                 :
+//                 <button onClick={RequestAccessToken}>Request Access Token</button>
+//             }
+//         </>
+//     );
+// };
+
+function ProfileContent() {
+    const { instance, accounts } = useMsal();
+    const [graphData, setGraphData] = useState(null);
+
+    const name = accounts[0] && accounts[0].name;
+
+    function RequestProfileData() {
+        const request = {
+            ...loginRequest,
+            account: accounts[0]
+        };
+
+        // Silently acquires an access token which is then attached to a request for Microsoft Graph data
+        instance.acquireTokenSilent(request).then((response) => {
+            callMsGraph(response.accessToken).then(response => setGraphData(response));
+        }).catch((e) => {
+            instance.acquireTokenPopup(request).then((response) => {
+                callMsGraph(response.accessToken).then(response => setGraphData(response));
+            });
+        });
+    }
+
+    return (
+        <>
+            <h5 className="card-title">Welcome {name}</h5>
+            {graphData ? 
+                <ProfileData graphData={graphData} />
+                :
+                <button onClick={RequestProfileData}>Request Profile Information</button>
+            }
+        </>
+    );
+};
 
 const Headerbar = (props) => {
-	const [loginmodalisOpen, setloginmodalisOpen] = useState(false);
-
-    function showloginModal(){
-        setloginmodalisOpen(true);
-    }
-
-    function removeloginModal(){
-        setloginmodalisOpen(false);
-    }
-	const user = props.user;
+	const isAuthenticated = useIsAuthenticated();
+	// const user = props.user;
 	return (
 		<div className={classes.header}>
 			<div className={classes.flexcontainer}>
@@ -71,10 +135,13 @@ const Headerbar = (props) => {
 						</button>
 					</form>
 				</div>
+				<AuthenticatedTemplate>
+					<ProfileContent />
+				</AuthenticatedTemplate>
 				<div className={classes.log_prof_button}>
-					{user ? <Profile /> : <Login />}
+					{isAuthenticated ? <Logout /> : <Login />}
 				</div>
-				{user ? (
+				{isAuthenticated ? (
 					<>
 					<Link to="/ads/post-ad">
 						<div className={classes.sell}>
@@ -85,15 +152,19 @@ const Headerbar = (props) => {
 					</>
 				) : (
 					<>
-						<div onClick={showloginModal} className={classes.sell}>
+						<div className={classes.sell}>
 							<img src={plus} className={classes.sellimage}></img>
 							<strong className={classes.sell_button}>SELL</strong>
 						</div>
-						{loginmodalisOpen ? <Modal removeloginModal={removeloginModal} /> : null}
-            			{loginmodalisOpen ? <Backdrop clickBackdrop={removeloginModal} /> : null}
 					</>
 				)}
 			</div>
+			<AuthenticatedTemplate>
+				<p>You are signed in!</p>
+			</AuthenticatedTemplate>
+			<UnauthenticatedTemplate>
+				<p>You are not signed in! Please sign in.</p>
+			</UnauthenticatedTemplate>
 		</div>
 	);
 };
