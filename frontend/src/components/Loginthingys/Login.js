@@ -1,29 +1,26 @@
-import Backdrop from '../UserInterface/Backdrop';
-import Modal from './Modal';
 import { useState } from 'react';
-import classes from './LoginLink.module.css'
+import classes from './Login.module.css'
 import login from '../../assests/login.png'
+import { useMsal } from "@azure/msal-react";
+import { loginRequest } from "../../configs/authConfigs";
+
+function handleLogin(instance) {
+    instance.loginRedirect(loginRequest).catch(e => {
+        console.error(e);
+    });
+}
 
 const Login = (props) => {
-    const [loginmodalisOpen, setloginmodalisOpen] = useState(false);
 
-    function showloginModal(){
-        setloginmodalisOpen(true);
-    }
-
-    function removeloginModal(){
-        setloginmodalisOpen(false);
-    }
+    const { instance } = useMsal();
 
     return (
-        <div className={classes.login}>
-            <strong onClick={showloginModal}>
-                <span>Login</span>
+        <button onClick={() => handleLogin(instance)} className={classes.login}>
+            <strong>
+                <span>Microsoft</span>
                 <img src={login} />
             </strong>
-            {loginmodalisOpen ? <Modal removeloginModal={removeloginModal} /> : null}
-            {loginmodalisOpen ? <Backdrop clickBackdrop={removeloginModal} /> : null}
-        </div>
+        </button>
     );
 }
  
