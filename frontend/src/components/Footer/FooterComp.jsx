@@ -25,9 +25,9 @@ export default function FooterComp() {
             <div className={classes.right}>
                 <p className={classes.Head}> Follow Us</p>
                 <p className={classes.body}>
-                    <a href="#" class="fa fa-instagram"> Instagram</a> <br />
-                    <a href="#" class="fa fa-facebook"> Facebook</a>  <br />
-                    <a href="#" class="fa fa-linkedin"> LinkedIn</a>  <br />
+                    <a href="#" className="fa fa-instagram"> Instagram</a> <br />
+                    <a href="#" className="fa fa-facebook"> Facebook</a>  <br />
+                    <a href="#" className="fa fa-linkedin"> LinkedIn</a>  <br />
                 </p>
             </div>
         </div>

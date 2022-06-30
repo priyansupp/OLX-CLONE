@@ -4,6 +4,8 @@ import { Link } from 'react-router-dom';
 
 
 function takeoutdate(date){
+  if(!date)
+  return;
   let temp=date.toString();
   let year=parseInt(temp.substring(0,4));
   let month=parseInt(temp.substring(5,7));
@@ -40,21 +42,13 @@ function takeoutdate(date){
   return ans;
 }
 
-function dateFromObject(idd) {
-  let ans=Date(parseInt(idd.substring(0, 8), 16) * 1000);
-  let year=ans.substring(11,16);
-  let date=ans.substring(8,10);
-  let month=ans.substring(4,7);
-  return date+" "+month;
-}
 
 export default function PostCard(props) {
   const desc = props.post.description;
   const id = props.post._id;
   const url = "/ads/" + id;
   let date=takeoutdate(props.post.dateOfBuying);
-  let idd=props.post._id;
-  let postdate=dateFromObject(idd);
+  let postdate=takeoutdate(props.post.createdAt);
 
    /*Fuction to add commas in the price */
    let new_price=props.post.price.toLocaleString("en-US");
@@ -67,8 +61,8 @@ export default function PostCard(props) {
           <p className={classes.dateOfBuying}>{date}</p>
           <p className={classes.pro_name}>{props.post.pro_name}</p>
           <p className={classes.hostel}>{props.post.hostel}</p>
-          <p className={classes.postDate}>{postdate}</p>
-          
+          <p className={classes.postDate}><i>{postdate.substring(0,6)}</i></p>
+         
       </div>
     </Link>
   );

@@ -81,6 +81,14 @@ export default function AdDescPage(props) {
     new_date = "error while loading date";
   }
 
+  let post_date;
+  if (post && post.createdAt) {
+    post_date = extractdate(post.createdAt);
+  }
+  else {
+    post_date = "error while loading date";
+  }
+
   /*Fuction to add commas in the price */
   let new_price;
   if (post && post.price) {
@@ -109,6 +117,7 @@ export default function AdDescPage(props) {
           <p className={classes.pro_name}>{post && post.pro_name}</p>
 
           <hr className={classes.hr} />
+          
           <p className={classes.descriptionHead}>Description</p>
           <p className={classes.description}>{post && post.description}</p>
 
@@ -128,9 +137,9 @@ export default function AdDescPage(props) {
             <p className={classes.price}>&#8377; {new_price}</p>
 
             {(post && post.negotiable) ? <p className={classes.nego}>It is negotiable </p> : <p className={classes.notNego}>It is <b>not</b> negotiable</p>}
-            <p className={classes.hostel}><img src={locate}></img><p classname={classes.hostelName}>{post && post.hostel}</p> </p>
+            <span className={classes.hostel}><img src={locate}></img><p className={classes.hostelName}>{post && post.hostel}</p> </span>
 
-            <p className={classes.postDate}>Ad was posted on <i>{dateFromObject(AdId)}</i> </p>
+            <p className={classes.postDate}>Ad was posted on <i>{post_date}</i> </p>
 
           </div>
 
