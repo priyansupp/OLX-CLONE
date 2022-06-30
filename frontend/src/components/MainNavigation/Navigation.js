@@ -4,6 +4,7 @@ import SignupPage from "../../pages/SignUpPage";
 import React from 'react';
 import HomePage from "../../pages/HomePage";
 import AdDescPage from "../../pages/Ad Page/AdDescPage";
+import ProfilePage from "../../pages/Profile Page/profilePage";
 
 const Navigation = () => {
 	const user = false;
@@ -17,6 +18,7 @@ const Navigation = () => {
 				<Route path="/ads/post-ad" element={<Postad />} />
 				<Route path="/login" element={user ? <HomePage user={user} /> : <HomePage user={!user} />} />
 				<Route path="/signup" element={<SignupPage />} />
+				<Route path="/profile-page" element={<ProfilePage />} />
 			</Routes>
 		</>
 	);
