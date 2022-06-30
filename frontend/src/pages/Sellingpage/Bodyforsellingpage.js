@@ -1,9 +1,13 @@
 import classes from './Bodyforsellingpage.module.css';
 import logo from '../../assests/Logo.png';
 import { useFormik } from "formik";
+import { useContext } from 'react';
+import { SellerIdContext } from '../../contexts/SellerIdContext';
 
 
 const Bodyforsellingpage = () => {
+
+    const {sellerId} = useContext(SellerIdContext);
 
     const validate = values => {
         const errors = {};
@@ -21,7 +25,8 @@ const Bodyforsellingpage = () => {
             myFile: "",
             description: "",
             hostel: "Siang Hostel",
-            negotiable: false
+            negotiable: false,
+            sellerId: sellerId
         },
         validate,
         onSubmit: (values) => {

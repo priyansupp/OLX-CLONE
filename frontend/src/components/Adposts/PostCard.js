@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 
 
 function takeoutdate(date){
+  if(!date) return;
   let temp=date.toString();
   let year=parseInt(temp.substring(0,4));
   let month=parseInt(temp.substring(5,7));
@@ -42,14 +43,14 @@ function takeoutdate(date){
 
 function dateFromObject(idd) {
   let ans=Date(parseInt(idd.substring(0, 8), 16) * 1000);
-  let year=ans.substring(11,16);
+  // let year=ans.substring(11,16);
   let date=ans.substring(8,10);
   let month=ans.substring(4,7);
   return date+" "+month;
 }
 
 export default function PostCard(props) {
-  const desc = props.post.description;
+  // const desc = props.post.description;
   const id = props.post._id;
   const url = "/ads/" + id;
   let date=takeoutdate(props.post.dateOfBuying);

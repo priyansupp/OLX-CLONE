@@ -53,7 +53,6 @@ app.use((req, res, next) => {
 })
 
 
-// http://localhost:4000/ad-api/getAds/category/mobiles
 // get requests
 // app.get('/', (req, res) => {
 //     res.json({message: 'Welcome to olxclone app'});

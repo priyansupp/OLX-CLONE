@@ -83,6 +83,19 @@ router.get('/getAds/sort/:sort', (req, res) => {
     // respond back with array of all the posts
     
 });
+
+
+router.get('/getAds/sellerId/:sellerId', (req, res) => {
+    Posts.find({sellerId: req.params.sellerId}, (err, posts) => {
+        if(err){
+            res.send("Error displaying your Ads");
+        } else {
+            res.send(posts);
+        }
+    })
+})
+
+
     
 // post ad in database
 router.post('/postAd', (req, res) => {

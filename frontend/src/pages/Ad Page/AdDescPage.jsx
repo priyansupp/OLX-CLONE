@@ -8,7 +8,6 @@ import locate from '../../assests/location.png';
 
 
 
-
 function extractdate(date) {
   let temp = date.toString();
   let year = parseInt(temp.substring(0, 4));
@@ -62,15 +61,25 @@ export default function AdDescPage(props) {
   const AdId = location.pathname.split('/')[2];
 
   const [post, setPost] = useState(null);
+  const [seller, setSeller] = useState(null);
 
   useEffect(() => {
     const fetchPost = async () => {
       const response1 = await fetch('http://localhost:4000/ad-api/getAds/id/' + AdId);
       const thatPost = await response1.json();
       setPost(thatPost);
+
+      const SellerId = thatPost.sellerId;
+      const response2 = await fetch('http://localhost:4000/auth/getSeller/sellerId/' + SellerId);
+      const thatSeller = await response2.json();
+      setSeller(thatSeller);
+
     }
     fetchPost();
+
   }, [AdId]);
+
+
 
   /*Function to format date in nicer format */
   let new_date;
@@ -95,7 +104,7 @@ export default function AdDescPage(props) {
     <div>
       <div className={classes.headbar}>
         <Link to="/">
-          <img src={logo} />
+          <img src={logo} alt="logo" />
         </Link>
       </div>
       <div className={classes.body}>
@@ -103,7 +112,7 @@ export default function AdDescPage(props) {
 
           <div className={classes.pro_image}>
             {/* {post && post.pro_image} */}
-            <img src="https://images.unsplash.com/photo-1588627541420-fce3f661b779?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxleHBsb3JlLWZlZWR8NXx8fGVufDB8fHx8&w=1000&q=80" />
+            <img src="https://images.unsplash.com/photo-1588627541420-fce3f661b779?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxleHBsb3JlLWZlZWR8NXx8fGVufDB8fHx8&w=1000&q=80" alt="post" />
           </div>
           <hr />
           <p className={classes.pro_name}>{post && post.pro_name}</p>
@@ -128,7 +137,7 @@ export default function AdDescPage(props) {
             <p className={classes.price}>&#8377; {new_price}</p>
 
             {(post && post.negotiable) ? <p className={classes.nego}>It is negotiable </p> : <p className={classes.notNego}>It is <b>not</b> negotiable</p>}
-            <p className={classes.hostel}><img src={locate}></img><p classname={classes.hostelName}>{post && post.hostel}</p> </p>
+            <p className={classes.hostel}><img src={locate} alt="location logo"></img><p className={classes.hostelName}>{post && post.hostel}</p> </p>
 
             <p className={classes.postDate}>Ad was posted on <i>{dateFromObject(AdId)}</i> </p>
 
@@ -141,7 +150,11 @@ export default function AdDescPage(props) {
             <div className={classes.temporary}> {/*about seller part is just for understanding purpose. change it according to your need */}
               Seller Info
             </div>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Omnis tempora quasi magni mollitia animi exercitationem illo error impedit, quis perspiciatis iusto, sint nisi? Eius nobis ad voluptate eligendi, impedit modi, voluptatum quasi debitis perferendis quisquam dicta molestias molestiae ab commodi quos possimus unde doloribus obcaecati a repudiandae officiis assumenda. Explicabo voluptatem praesentium temporibus eligendi quas quisquam, sint obcaecati quos voluptas!
+            <p>
+              {seller && seller.email} <br />
+              {seller && seller.Name} <br />
+              {seller && seller.roll_no} <br />
+            </p>
           </div>
         </div>
 

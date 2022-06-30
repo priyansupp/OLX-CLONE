@@ -7,7 +7,6 @@ import plus from "../../assests/plus.png";
 import Profile from "../Profilethingys/Profile";
 import { useState } from 'react';
 import { useIsAuthenticated } from "@azure/msal-react";
-import { Logout } from "../Loginthingys/Logout";
 import { AuthenticatedTemplate, UnauthenticatedTemplate, useMsal } from "@azure/msal-react";
 import { loginRequest } from "../../configs/authConfigs";
 import { ProfileData } from "../Loginthingys/ProfileData";
@@ -75,21 +74,22 @@ function ProfileContent() {
             {graphData ? 
                 <ProfileData graphData={graphData} />
                 :
-                <button onClick={RequestProfileData}>Request Profile Information</button>
+                RequestProfileData()
             }
         </>
     );
 };
 
-const Headerbar = (props) => {
+const Headerbar = () => {
 	const isAuthenticated = useIsAuthenticated();
+
 	// const user = props.user;
 	return (
 		<div className={classes.header}>
 			<div className={classes.flexcontainer}>
 				<div className={classes.logo}>
 					<Link to="/">
-						<img src={logo} height={80} />
+						<img src={logo} height={80} alt="backtohome" />
 					</Link>
 				</div>
 				<div className={classes.hostel}>
@@ -131,29 +131,32 @@ const Headerbar = (props) => {
 							<option value="Mattresses">Mattresses</option>
 						</datalist>
 						<button>
-							<img src={search} />
+							<img src={search} alt="search" />
 						</button>
 					</form>
 				</div>
 				<AuthenticatedTemplate>
 					<ProfileContent />
 				</AuthenticatedTemplate>
+				<AuthenticatedTemplate>
+					<Profile />
+				</AuthenticatedTemplate>
 				<div className={classes.log_prof_button}>
-					{isAuthenticated ? <Logout /> : <Login />}
+					{isAuthenticated ? null : <Login />}
 				</div>
 				{isAuthenticated ? (
 					<>
 					<Link to="/ads/post-ad">
 						<div className={classes.sell}>
-							<img src={plus} className={classes.sellimage}></img>
+							<img src={plus} className={classes.sellimage} alt="sell"></img>
 							<strong className={classes.sell_button}>SELL</strong>
 						</div>
 					</Link>
 					</>
 				) : (
 					<>
-						<div className={classes.sell}>
-							<img src={plus} className={classes.sellimage}></img>
+						<div className={classes.sell} onClick={() => alert("You are not signed in. Sign in to post your Ad.")}>
+							<img src={plus} className={classes.sellimage} alt="search"></img>
 							<strong className={classes.sell_button}>SELL</strong>
 						</div>
 					</>

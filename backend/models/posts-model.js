@@ -30,6 +30,14 @@ const postSchema = new Schema({
     negotiable: {
         type: Boolean,
         require: [true, 'Negotiable or not?']
+    },
+    sellerId: {
+        type: String,
+        require: [true, 'Seller Id is required']
+    },
+    pro_pic: {
+        data: Buffer,
+        contentType: String
     }
 });
 
