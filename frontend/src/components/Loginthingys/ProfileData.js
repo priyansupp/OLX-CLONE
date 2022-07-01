@@ -1,11 +1,11 @@
 import React, { useContext, useEffect } from "react";
-import { SellerIdContext } from "../../contexts/SellerIdContext";
+import { UserIdContext } from "../../contexts/UserIdContext";
 /**
  * Renders information about the user obtained from Microsoft Graph
  */
 export const ProfileData = (props) => {
 
-    const {setSellerId} = useContext(SellerIdContext);
+    const {setUserId} = useContext(UserIdContext);
 
     useEffect(() => {
         const postUser = async () => {
@@ -18,7 +18,8 @@ export const ProfileData = (props) => {
                     Name: props.graphData.givenName,
                     roll_no: props.graphData.surname,
                     email: props.graphData.userPrincipalName,
-                    microsoftId: props.graphData.id
+                    microsoftId: props.graphData.id,
+                    program: props.graphData.jobTitle
                 })
             });
             
@@ -32,7 +33,7 @@ export const ProfileData = (props) => {
             }
         }
         postUser();
-        setSellerId(props.graphData.id);
+        setUserId(props.graphData.id);
         console.log(props.graphData.id);
     }, [props.graphData]);
 

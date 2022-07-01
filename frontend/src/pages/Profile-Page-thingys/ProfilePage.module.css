@@ -1,0 +1,44 @@
+.headbar {
+    height: 96px;
+    background-color: rgba(1, 43, 160, 0.503);
+    margin-bottom: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.headbar img {
+    height: 84px;
+    border: 2px solid black;
+}
+
+.body{
+    display: flex;
+    flex-direction: row;
+}
+
+
+.profilePart{
+    flex:25%;
+    margin: 3%;
+    background-color: steelblue;
+    text-align: center;
+    font-size: 1.8rem;
+    font-weight: 500;
+}
+
+.AdPart{
+    flex:55%;
+    margin: 3%;
+    margin-left: 0;
+    background-color: crimson;
+}
+
+.profileHead,.AdHead{
+    text-align: center;
+    font-size: 4rem;
+    font-weight: 500;
+    margin-bottom: 20px;
+    margin-top: 20px;
+    border-bottom: 1px solid black;
+}

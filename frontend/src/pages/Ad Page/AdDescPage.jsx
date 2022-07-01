@@ -9,6 +9,7 @@ import locate from '../../assests/location.png';
 
 
 function extractdate(date) {
+  if(!date) return;
   let temp = date.toString();
   let year = parseInt(temp.substring(0, 4));
   let month = parseInt(temp.substring(5, 7));
@@ -43,14 +44,6 @@ function extractdate(date) {
 
   let ans = dat + " " + monthstring + ", " + year;
   return ans;
-}
-
-function dateFromObject(idd) {
-  let ans = Date(parseInt(idd.substring(0, 8), 16) * 1000);
-  let year = ans.substring(11, 16);
-  let date = ans.substring(8, 10);
-  let month = ans.substring(4, 7);
-  return date + " " + month + " " + year;
 }
 
 //----------------------------------------------------
@@ -90,6 +83,14 @@ export default function AdDescPage(props) {
     new_date = "error while loading date";
   }
 
+  let post_date;
+  if (post && post.createdAt) {
+    post_date = extractdate(post.createdAt);
+  }
+  else {
+    post_date = "error while loading date";
+  }
+
   /*Fuction to add commas in the price */
   let new_price;
   if (post && post.price) {
@@ -112,12 +113,14 @@ export default function AdDescPage(props) {
 
           <div className={classes.pro_image}>
             {/* {post && post.pro_image} */}
-            <img src="https://images.unsplash.com/photo-1588627541420-fce3f661b779?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxleHBsb3JlLWZlZWR8NXx8fGVufDB8fHx8&w=1000&q=80" alt="post" />
+            {post && <img src={'http://localhost:4000/images/' + post.photo} alt="post" />}
+            
           </div>
           <hr />
           <p className={classes.pro_name}>{post && post.pro_name}</p>
 
           <hr className={classes.hr} />
+          
           <p className={classes.descriptionHead}>Description</p>
           <p className={classes.description}>{post && post.description}</p>
 
@@ -137,9 +140,9 @@ export default function AdDescPage(props) {
             <p className={classes.price}>&#8377; {new_price}</p>
 
             {(post && post.negotiable) ? <p className={classes.nego}>It is negotiable </p> : <p className={classes.notNego}>It is <b>not</b> negotiable</p>}
-            <p className={classes.hostel}><img src={locate} alt="location logo"></img><p className={classes.hostelName}>{post && post.hostel}</p> </p>
+            <span className={classes.hostel}><img src={locate} alt="location logo"></img><p className={classes.hostelName}>{post && post.hostel}</p> </span>
 
-            <p className={classes.postDate}>Ad was posted on <i>{dateFromObject(AdId)}</i> </p>
+            <p className={classes.postDate}>Ad was posted on <i>{post_date}</i> </p>
 
           </div>
 

@@ -1,6 +1,7 @@
 import React from 'react';
 import classes from './FooterComp.module.css';
 
+
 export default function FooterComp() {
     return (
         <div className={classes.FooterComp}>

@@ -1,0 +1,12 @@
+.image img{
+    height: 84px;
+    border: 2px solid black;
+}
+
+.image{
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    background-color: rgba(1, 43, 160, 0.503);
+    height: 96px;
+}

@@ -23,8 +23,10 @@ router.post('/postUser', (req, res) => {
 router.get('/getSeller/sellerId/:sellerId', (req, res) => {
     User.findOne({microsoftId: req.params.sellerId}, (err, seller) => {
         if(err){
+            console.log("error in sending user data");
             res.send("There's an error");
         } else {
+            console.log("User data sent");
             res.send(seller);
         }
         // console.log(seller);

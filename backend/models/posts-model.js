@@ -35,11 +35,10 @@ const postSchema = new Schema({
         type: String,
         require: [true, 'Seller Id is required']
     },
-    pro_pic: {
-        data: Buffer,
-        contentType: String
+    photo: {
+        type: String
     }
-});
+}, {timestamps: true});
 
 // creates a model/collection with the name 'posts' by pluralising the first parameter. The 2nd parameter is the schema it should follow to create the collection.
 const Posts = mongoose.model('post', postSchema);

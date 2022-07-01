@@ -1,12 +1,17 @@
-import classes from './Postad.module.css';
-import HeaderforPostad from './HeaderforPostad';
 import Bodyforsellingpage from './Bodyforsellingpage';
+import logo from '../../assests/Logo.png';
+import classes from './Postad.module.css'
+import { Link } from "react-router-dom";
 
 const Postad = () => {
     return (
         <div>
             <header>
-                <HeaderforPostad />
+                <div className={classes.image}>
+                    <Link to="/">
+                        <img src={logo} />
+                    </Link>
+                </div>
             </header>
             <main>
                 <Bodyforsellingpage />

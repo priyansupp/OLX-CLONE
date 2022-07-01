@@ -24,13 +24,13 @@
     font-size: 20px;
 }
 
-.fa {
+.body a {
     font-size: 25px;
     text-decoration: none;
 
 }
 
-.fa:hover{
+.body a:hover{
     text-decoration: underline;
 }
 

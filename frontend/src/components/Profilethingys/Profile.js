@@ -20,7 +20,7 @@ const Profile = () => {
             {clicked ? 
             <ul>
                 <li className={classes.item}>
-                    <Link to='/profile/view'>
+                    <Link to='/profile-page'>
                     View Profile
                     </Link>
                 </li>
