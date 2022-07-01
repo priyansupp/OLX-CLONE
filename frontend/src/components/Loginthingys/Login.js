@@ -10,7 +10,7 @@ function handleLogin(instance) {
     });
 }
 
-const Login = (props) => {
+const Login = () => {
 
     const { instance } = useMsal();
 

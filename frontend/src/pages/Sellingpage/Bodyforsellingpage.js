@@ -1,52 +1,75 @@
 import classes from './Bodyforsellingpage.module.css';
 import logo from '../../assests/Logo.png';
-import { useFormik } from "formik";
-
+import { useContext, useState } from 'react';
+import { UserIdContext } from '../../contexts/UserIdContext';
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 const Bodyforsellingpage = () => {
 
-    const validate = values => {
-        const errors = {};
-        if(!values.category){
-            errors.category = 'Category is required';
-        }
-    }
-    
-    const formik = useFormik({          // the useFormik hook takes in object and returns object.
-        initialValues: {
-            category: "",       // name attribute from input fields
-            pro_name: "",
-            price: 0,
-            dateOfBuying: "",
-            myFile: "",
-            description: "",
-            hostel: "Siang Hostel",
-            negotiable: false
-        },
-        validate,
-        onSubmit: (values) => {
-            console.log(values);
-            fetch('http://localhost:4000/ad-api/postAd', {
-                method: "POST",
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(values),
-                credentials: "include"
-            }).then(response => response.json())
-            .then(data => {
-                console.log(data);
-                alert("Ad posted.");
-            })
-            .catch(err => console.log("Error in posting Ad. ", err));
-        }
-    });
+    const {userId} = useContext(UserIdContext);
 
-    // console.log(formik.values);      // logs in values at every change in any input.
+    const navigate = useNavigate();
+
+    // const validate = values => {
+    //     const errors = {};
+    //     if(!values.category){
+    //         errors.category = 'Category is required';
+    //     }
+    // }
+
+    const initialValues = {
+        category: "",       // name attribute from input fields
+        pro_name: "",
+        price: 0,
+        dateOfBuying: "",
+        description: "",
+        hostel: "Siang Hostel",
+        negotiable: false,
+        sellerId: userId
+    }
+
+    const [values, setValues] = useState(initialValues);
+    const [pro_image, setPro_image] = useState(null);
+
+    const onChangehandler = (e) => {
+        setValues({
+            ...values,
+            [e.target.name]: e.target.value
+        });
+    }
+
+
+    const submitHandler = async (e) => {
+        e.preventDefault();
+        console.log(values);
+
+        if(pro_image) {
+            const data = new FormData();
+            const filename = Date.now() + pro_image.name;
+            data.append("name", filename);
+            data.append("file", pro_image);
+            values.photo = filename;
+            try {
+                await axios.post('http://localhost:4000/ad-api/upload', data);
+            } catch(err) {
+                console.log("error in uploading file");
+            }
+        }
+        try {
+            const res = await axios.post('http://localhost:4000/ad-api/postAd', values);
+        } catch(err) {
+            console.log("error uploading text inputs");
+        };
+
+        alert("Ad posted!!");
+
+        navigate("/profile-page");
+    }
 
     function Handlereset(){
         if(window.confirm("Are you sure you want to Reset?")){
-            formik.handleReset();
+            setValues(initialValues);
         }
     };
 
@@ -59,7 +82,7 @@ const Bodyforsellingpage = () => {
                 Post Your Ad
             </p>
             <div>
-                <form className={classes.form} encType='multipart/form-data' onSubmit={formik.handleSubmit}>
+                <form className={classes.form} encType='multipart/form-data' onSubmit={submitHandler}>
                     <div>
                         <label htmlFor='Category'>Choose Category : </label>
                         <input 
@@ -68,8 +91,8 @@ const Bodyforsellingpage = () => {
                         id='Category' 
                         name='category' 
                         required 
-                        onChange={formik.handleChange}
-                        value={formik.values.category}/>
+                        onChange={onChangehandler}
+                        value={values.category}/>
                         <datalist id='categories'>
                             <option value="Mobiles">Mobile Phones</option>
                             <option value="Laptops">Laptops of all type</option>
@@ -79,7 +102,6 @@ const Bodyforsellingpage = () => {
                             <option value="Others">Others(please specify)</option>
                         </datalist>
                     </div>
-                    {formik.errors.category ? <div>{formik.errors.category}</div> : null}
                     <div>
                         <label htmlFor='Name'>Product Name : </label>
                         <input 
@@ -88,8 +110,8 @@ const Bodyforsellingpage = () => {
                         name='pro_name' 
                         id='Name' 
                         required 
-                        onChange={formik.handleChange}
-                        value={formik.values.pro_name}/>
+                        onChange={onChangehandler}
+                        value={values.pro_name}/>
                     </div>
                     <div>
                         <label htmlFor='Price'>Price : ₹</label>
@@ -100,8 +122,8 @@ const Bodyforsellingpage = () => {
                         name='price' 
                         required 
                         min='1'
-                        onChange={formik.handleChange}
-                        value={formik.values.price} />
+                        onChange={onChangehandler}
+                        value={values.price} />
                     </div>
                     <div>
                         <label htmlFor='Date'>Date of Buying</label>
@@ -111,8 +133,8 @@ const Bodyforsellingpage = () => {
                         id='Date' 
                         name='dateOfBuying' 
                         required
-                        onChange={formik.handleChange}
-                        value={formik.values.dateOfBuying}/>
+                        onChange={onChangehandler}
+                        value={values.dateOfBuying}/>
                     </div>
                     <div>
                         <label htmlFor='myfile'>Upload Photo : </label>
@@ -120,9 +142,10 @@ const Bodyforsellingpage = () => {
                         className={classes.input} 
                         type='file' 
                         id='myfile' 
-                        name='myfile' 
-                        onChange={formik.handleChange}
-                        value={formik.values.myFile}/>
+                        name='pro_image' 
+                        onChange={(e) => setPro_image(e.target.files[0])}
+                        required
+                        />
                     </div>
                     <div>
                         <label htmlFor='hostel'>Select your hostel : </label>
@@ -130,8 +153,8 @@ const Bodyforsellingpage = () => {
                             className={classes.input}
                             id='hostel'
                             name='hostel'
-                            onChange={formik.handleChange}
-                            value={formik.values.hostel}>
+                            onChange={onChangehandler}
+                            value={values.hostel}>
                             <option value="Siang Hostel">Siang Hostel</option>
                             <option value="Brahmaputra Hostel">Brahmaputra Hostel</option>
                             <option value="Lohit Hostel">Lohit Hostel</option>
@@ -154,8 +177,8 @@ const Bodyforsellingpage = () => {
                         placeholder='Briefly describe your product...' 
                         required id='description' 
                         name='description'
-                        onChange={formik.handleChange}
-                        value={formik.values.description}></textarea>
+                        onChange={onChangehandler}
+                        value={values.description}></textarea>
                     </div>
                     <div>
                         <input 
@@ -163,13 +186,13 @@ const Bodyforsellingpage = () => {
                         type='checkbox' 
                         id='Negotiation' 
                         name='negotiable'
-                        onChange={formik.handleChange}
-                        value={formik.values.negotiable}/>
+                        onChange={onChangehandler}
+                        value={values.negotiable}/>
                         <label htmlFor='Negotiation'> Negotiable</label>
                     </div>
                     <div>
                         <button className={classes.reset} type='reset' id="resetbtn" onClick={Handlereset}>Reset</button>
-                        <button className={classes.submit} type='submit' onClick={formik.handleSubmit}>PostAd</button>
+                        <button className={classes.submit} type='submit' onClick={submitHandler}>PostAd</button>
                     </div>
                     
                 </form>

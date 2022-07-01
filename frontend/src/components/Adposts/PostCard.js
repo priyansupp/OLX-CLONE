@@ -4,8 +4,7 @@ import { Link } from 'react-router-dom';
 
 
 function takeoutdate(date){
-  if(!date)
-  return;
+  if(!date) return;
   let temp=date.toString();
   let year=parseInt(temp.substring(0,4));
   let month=parseInt(temp.substring(5,7));
@@ -43,25 +42,36 @@ function takeoutdate(date){
 }
 
 
+
 export default function PostCard(props) {
-  const desc = props.post.description;
+  // const desc = props.post.description;
   const id = props.post._id;
   const url = "/ads/" + id;
   let date=takeoutdate(props.post.dateOfBuying);
-  let postdate=takeoutdate(props.post.createdAt);
+  // let postdate=takeoutdate();
+
+  const PF = 'http://localhost:4000/images/';
 
    /*Fuction to add commas in the price */
-   let new_price=props.post.price.toLocaleString("en-US");
+  
+  let post_date;
+  if (props.post && props.post.createdAt) {
+    post_date = takeoutdate(props.post.createdAt);
+  }
+  else {
+    post_date = "error";
+  }
+  let new_price=props.post.price.toLocaleString("en-US");
 
   return (
     <Link to={url}>
       <div className={classes.posts}>
-          <img className={classes.image} src={props.post.pro_image} alt="" />
-          <p className={classes.price}>&#8377;{new_price}</p>
+          <img className={classes.image} src={PF + props.post.photo} alt="" />
+          <p className={classes.price}>{new_price}</p>
           <p className={classes.dateOfBuying}>{date}</p>
           <p className={classes.pro_name}>{props.post.pro_name}</p>
           <p className={classes.hostel}>{props.post.hostel}</p>
-          <p className={classes.postDate}><i>{postdate.substring(0,6)}</i></p>
+          <p className={classes.postDate}><i>{post_date}</i></p>
          
       </div>
     </Link>

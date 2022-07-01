@@ -3,7 +3,7 @@ import Headerbar from "../components/Headerthingys/Headerbar";
 import MainBodyPosts from '../components/Adposts/MainBodyPosts';
 import { useState } from "react";
 
-const HomePage = (props) => {
+const HomePage = () => {
     const [category, setCategory] = useState('All');
     const [filter, setFilter] = useState({
         sort: 'clear',
@@ -18,7 +18,7 @@ const HomePage = (props) => {
     return (
         <div>
             <header>
-                <Headerbar user={props.user} />
+                <Headerbar />
             </header>
             <div>
                 <Horizontalbar setCategory={setCategory} setFilter={setFilter} filter={filter} />

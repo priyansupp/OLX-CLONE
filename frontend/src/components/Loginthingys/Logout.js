@@ -1,12 +1,14 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useMsal } from "@azure/msal-react";
-import login from '../../assests/login.png'
-import classes from './Login.module.css'
+import { UserIdContext } from "../../contexts/UserIdContext";
+// import login from '../../assests/login.png'
+// import classes from './Login.module.css'
 
-function handleLogout(instance) {
+function handleLogout(instance, setUserId) {
     instance.logoutRedirect().catch(e => {
         console.error(e);
     });
+    setUserId('');
 }
 
 /**
@@ -14,9 +16,10 @@ function handleLogout(instance) {
  */
 export const Logout = () => {
     const { instance } = useMsal();
+    const {setUserId} = useContext(UserIdContext);
 
     return (
-        <button onClick={() => handleLogout(instance)}>
+        <button onClick={() => handleLogout(instance, setUserId)}>
             <strong>
                 <span>Logout</span>
             </strong>

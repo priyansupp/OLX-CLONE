@@ -5,47 +5,15 @@ import logo from "../../assests/Logo.png";
 import search from "../../assests/SearchIcon.png";
 import plus from "../../assests/plus.png";
 import Profile from "../Profilethingys/Profile";
-import { useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { useIsAuthenticated } from "@azure/msal-react";
-import { Logout } from "../Loginthingys/Logout";
 import { AuthenticatedTemplate, UnauthenticatedTemplate, useMsal } from "@azure/msal-react";
 import { loginRequest } from "../../configs/authConfigs";
 import { ProfileData } from "../Loginthingys/ProfileData";
 import { callMsGraph } from "../Loginthingys/graph";
+import { QueryNameContext } from "../../contexts/QueryNameContext";
+import { QueryHostelContext } from "../../contexts/QueryHostelContext";
 
-// function ProfileContent() {
-//     const { instance, accounts, inProgress } = useMsal();
-//     const [accessToken, setAccessToken] = useState(null);
-
-//     const name = accounts[0] && accounts[0].name;
-
-//     function RequestAccessToken() {
-//         const request = {
-//             ...loginRequest,
-//             account: accounts[0]
-//         };
-
-//         // Silently acquires an access token which is then attached to a request for Microsoft Graph data
-//         instance.acquireTokenSilent(request).then((response) => {
-//             setAccessToken(response.accessToken);
-//         }).catch((e) => {
-//             instance.acquireTokenPopup(request).then((response) => {
-//                 setAccessToken(response.accessToken);
-//             });
-//         });
-//     }
-
-//     return (
-//         <>
-//             <h5 className="card-title">Welcome {name}</h5>
-//             {accessToken ? 
-//                 <p>Access Token Acquired!</p>
-//                 :
-//                 <button onClick={RequestAccessToken}>Request Access Token</button>
-//             }
-//         </>
-//     );
-// };
 
 function ProfileContent() {
     const { instance, accounts } = useMsal();
@@ -75,21 +43,26 @@ function ProfileContent() {
             {graphData ? 
                 <ProfileData graphData={graphData} />
                 :
-                <button onClick={RequestProfileData}>Request Profile Information</button>
+                RequestProfileData()
             }
         </>
     );
 };
 
-const Headerbar = (props) => {
+const Headerbar = () => {
 	const isAuthenticated = useIsAuthenticated();
-	// const user = props.user;
+
+	const {queryName, setQueryName} = useContext(QueryNameContext);
+	const {queryHostel, setQueryHostel} = useContext(QueryHostelContext);
+	console.log("Query name is ", queryName);
+	console.log("Query hostel is ", queryHostel);
+
 	return (
 		<div className={classes.header}>
 			<div className={classes.flexcontainer}>
 				<div className={classes.logo}>
 					<Link to="/">
-						<img src={logo} height={80} />
+						<img src={logo} height={80} alt="backtohome" />
 					</Link>
 				</div>
 				<div className={classes.hostel}>
@@ -99,6 +72,7 @@ const Headerbar = (props) => {
 							list="locations"
 							id="hostel-locations"
 							placeholder="Search for hostels within IITG"
+							onChange={e => setQueryHostel(e.target.value)}
 						/>
 						<datalist id="locations">
 							<option value="Siang Hostel"></option>
@@ -120,40 +94,38 @@ const Headerbar = (props) => {
 					<form>
 						<input
 							className={classes.searchbarbox}
-							list="items"
+							type='text'
 							id="item-names"
-							placeholder="Find Mobile Phones, Books and more..."
+							placeholder="Search by name for Phones, Books and more..."
+							onChange={e => setQueryName(e.target.value)}
 						/>
-						<datalist id="items">
-							<option value="Mobiles"></option>
-							<option value="Laptops">Laptops</option>
-							<option value="Cycles">Cycles</option>
-							<option value="Mattresses">Mattresses</option>
-						</datalist>
-						<button>
-							<img src={search} />
+						<button onClick={e => e.preventDefault()} type='button'>
+							<img src={search} alt="search" />
 						</button>
 					</form>
 				</div>
 				<AuthenticatedTemplate>
 					<ProfileContent />
 				</AuthenticatedTemplate>
+				<AuthenticatedTemplate>
+					<Profile />
+				</AuthenticatedTemplate>
 				<div className={classes.log_prof_button}>
-					{isAuthenticated ? <Logout /> : <Login />}
+					{isAuthenticated ? null : <Login />}
 				</div>
 				{isAuthenticated ? (
 					<>
 					<Link to="/ads/post-ad">
 						<div className={classes.sell}>
-							<img src={plus} className={classes.sellimage}></img>
+							<img src={plus} className={classes.sellimage} alt="sell"></img>
 							<strong className={classes.sell_button}>SELL</strong>
 						</div>
 					</Link>
 					</>
 				) : (
 					<>
-						<div className={classes.sell}>
-							<img src={plus} className={classes.sellimage}></img>
+						<div className={classes.sell} onClick={() => alert("You are not signed in. Sign in to post your Ad.")}>
+							<img src={plus} className={classes.sellimage} alt="search"></img>
 							<strong className={classes.sell_button}>SELL</strong>
 						</div>
 					</>
