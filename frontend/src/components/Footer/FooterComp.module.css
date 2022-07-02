@@ -15,8 +15,8 @@
 }
 
 .Head{
-    font-size: 35px;
-    font-weight:bold;
+    font-size: 33px;
+    font-weight:600;
 }
 
 .body{
@@ -24,10 +24,10 @@
     font-size: 20px;
 }
 
-.body a {
+.right i{
     font-size: 25px;
-    text-decoration: none;
-
+    color: purple;
+    cursor: pointer;
 }
 
 .body a:hover{
@@ -44,7 +44,15 @@
     width: 90%;
 }
 
-.head{
-    margin: 10px 0px;
+.Head{
+    margin-bottom: 0px;
+    margin-top: 10px;
+}
+.body{
+    margin-bottom: 0px;
+    margin-top: 10px; 
+}
+.right{
+    margin-bottom: 20px;
 }
 }

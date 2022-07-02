@@ -67,7 +67,7 @@ export default function PostCard(props) {
     <Link to={url}>
       <div className={classes.posts}>
           <img className={classes.image} src={PF + props.post.photo} alt="" />
-          <p className={classes.price}>{new_price}</p>
+          <p className={classes.price}>&#8377;{new_price}</p>
           <p className={classes.dateOfBuying}>{date}</p>
           <p className={classes.pro_name}>{props.post.pro_name}</p>
           <p className={classes.hostel}>{props.post.hostel}</p>
