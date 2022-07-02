@@ -35,8 +35,11 @@ export default function ProfilePage(props) {
                     <div>
                         <p className={classes.profileHead}> Your Data</p>
                         <p className={classes.name}>{userData.Name}</p>
+                        <hr />
                         <p className={classes.roll}>{userData.roll_no}</p>
+                        <hr />
                         <p className={classes.mail}>{userData.email}</p>
+                        <hr />
                         <p className={classes.program}>{userData.program}</p>
                     </div>
                     : 

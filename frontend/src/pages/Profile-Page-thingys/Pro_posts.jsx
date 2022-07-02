@@ -1,5 +1,6 @@
 import React from 'react';
 import { useState } from 'react';
+import PostCard from '../../components/Adposts/PostCard';
 import classes from './Pro_posts.module.css'
 
 
@@ -65,19 +66,13 @@ export default function Pro_posts(props) {
         <div className={classes.body}>
             {!deleted ? 
             <div>
-                <div className={classes.posts}>
-                    <img className={classes.image} src={'http://localhost:4000/images/' + props.post.photo} alt="" />
-                    <p className={classes.price}>&#8377;{props.post.price}</p>
-                    <p className={classes.dateOfBuying}>{props.post.dateOfBuying}</p>
-                    <p className={classes.pro_name}>{props.post.pro_name}</p>
-                    <p className={classes.hostel}>{props.post.hostel}</p>
-                    <p className={classes.createdAt}><i>{props.post.createdAt}</i></p>
-                </div>
+                <PostCard post={props.post} key={props.post._id} />
                 <div className={classes.desc}>
                     <p className={classes.descHead}>Description : </p>
                     <p className={classes.description}>{props.post.description}</p>
+                    <button type='button' onClick={deleteHandler}>Delete</button>
                 </div>
-                <button type='button' onClick={deleteHandler}>Delete</button>
+                <hr />
             </div>
             :
             null}
