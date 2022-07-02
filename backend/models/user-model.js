@@ -3,20 +3,17 @@ const Schema = mongoose.Schema;
 
 
 const userSchema = new Schema({
-    firstName: {
+    Name: {
         type: String,
         require: [true, 'firstName is required.']
     },
-    lastName: {
-        type: String,
-        require: [true, 'lastName is required.']
-    },
-    age: {
-        type: String
-    },
     hostel: {
         type: String,
-        require: [true, 'Hostel is required.']
+        // require: [true, 'Hostel is required.']
+    },
+    roll_no: {
+        type: Number,
+        require: [true, 'Roll number is required.']
     },
     department: {
         type: String
@@ -27,14 +24,19 @@ const userSchema = new Schema({
     },
     phone: {
         type: Number,
-        require: [true, 'Phone number is required.']
+        // require: [true, 'Phone number is required.']
+    },
+    microsoftId: {
+        type: String,
+        require: [true, 'Id is required']
     },
     profile_pic: {
-        type: File
+        data: Buffer,
+        contentType: String
     },
-    password: {
+    program: {
         type: String,
-        require: [true, 'Password is required.']
+        require: [true, 'Program is required.']
     }
 });
 
