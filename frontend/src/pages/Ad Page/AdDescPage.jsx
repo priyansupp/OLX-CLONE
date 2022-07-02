@@ -201,10 +201,11 @@ export default function AdDescPage() {
           <div className={classes.aboutSeller}>
             <div className={classes.temporary}>
               Seller Info
+              <hr />
             </div>
             <p>
               {seller && seller.Name} <br />
-              <i class="fa fa-envelope"></i> &nbsp;
+              <i className="fa fa-envelope"></i> &nbsp;
               {seller && seller.email} <br />
               Department : {dept} <br />
               Year Enrolled : 20{enrolled_year} <br />
