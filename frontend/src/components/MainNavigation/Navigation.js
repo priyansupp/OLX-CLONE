@@ -13,7 +13,7 @@ const Navigation = () => {
 					<Route path=":id" element={<AdDescPage />} />
 				</Route>
 				<Route path="/" element={<HomePage />} />
-				<Route path="/ads/post-ad" element={ <Postad />} />
+				<Route path="/ads/post-ad" element={<Postad />} />
 				<Route path="/profile-page" element={<ProfilePage />} />
 			</Routes>
 		</>

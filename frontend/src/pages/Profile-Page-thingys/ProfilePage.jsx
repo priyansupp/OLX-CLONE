@@ -1,8 +1,8 @@
 import classes from './ProfilePage.module.css'
-import logo from "../../assests/Logo.png";
+import logo from "../../assets/Logo.png";
 import { Link } from "react-router-dom";
 import Pro_posts from './Pro_posts';
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext } from "react";
 import { UserIdContext } from "../../contexts/UserIdContext";
 import { useQuery } from 'react-query';
 
@@ -35,8 +35,11 @@ export default function ProfilePage(props) {
                     <div>
                         <p className={classes.profileHead}> Your Data</p>
                         <p className={classes.name}>{userData.Name}</p>
+                        <hr />
                         <p className={classes.roll}>{userData.roll_no}</p>
+                        <hr />
                         <p className={classes.mail}>{userData.email}</p>
+                        <hr />
                         <p className={classes.program}>{userData.program}</p>
                     </div>
                     : 
@@ -53,10 +56,3 @@ export default function ProfilePage(props) {
     );
 }
 
-
-// profilePage.defaultProps = {
-//     name: 'Yash Kumar Malik',
-//     roll: '200123072',
-//     mail: 'y.malik@iitg.ac.in',
-//     course: 'B.Tech.'
-// };

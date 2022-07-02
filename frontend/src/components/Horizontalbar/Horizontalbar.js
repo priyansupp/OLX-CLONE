@@ -10,5 +10,5 @@ const Horizontalbar = (props) => {
         </div>
     );
 }
- 
+
 export default Horizontalbar;

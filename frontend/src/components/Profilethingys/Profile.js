@@ -1,31 +1,27 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import { Logout } from '../Loginthingys/Logout';
 import classes from './Profile.module.css';
-
+import logout from '../../assets/logout.png';
+import profile from '../../assets/profile.png';
 
 const Profile = () => {
 
-    const [clicked, setClicked] = useState(0);
-
-    const handleClick = () => {
-        if(clicked) setClicked(0);
-        else setClicked(1);
-    }
-
     return (
-        <div>
-            <p className={classes.list} onClick={handleClick}>Profile</p>
-
-            {clicked ? 
-            <ul>
-                <li className={classes.item}>
-                    <Link to='/profile-page'>
-                    View Profile
-                    </Link>
+        <div className={classes.profile}>
+            <p className={classes.prof_text}>Profile</p>
+            <ul className={classes.list}>
+                <Link to='/profile-page'>
+                    <li className={classes.item1}>
+                        <img src={profile} alt="profile" />
+                        <span>View Profile</span>
+                    </li>
+                </Link>
+                <li className={classes.item2}>
+                    <img src={logout} alt="logout" />
+                    <span><Logout /></span>
                 </li>
-                <li className={classes.item}><Logout /></li>
-            </ul> : null}
+            </ul>
             
         </div>
     );

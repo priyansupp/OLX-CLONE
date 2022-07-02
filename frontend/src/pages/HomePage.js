@@ -8,7 +8,7 @@ const HomePage = () => {
     const [filter, setFilter] = useState({
         sort: 'clear',
         min_price: 0,
-        max_price: Number.POSITIVE_INFINITY
+        max_price: Number.MAX_SAFE_INTEGER
     });
     // {
     //     sort: "inc/dec/clear",            // inc means increasing, dec decreasing, clear means sorted by date(fresh reccoss)

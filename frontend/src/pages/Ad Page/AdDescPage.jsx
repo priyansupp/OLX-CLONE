@@ -1,10 +1,10 @@
 import React from 'react';
 import classes from './AdDescPage.module.css'
-import logo from "../../assests/Logo.png";
+import logo from "../../assets/Logo.png";
+import locate from '../../assets/location.png';
 import { useLocation } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { Link } from "react-router-dom";
-import locate from '../../assests/location.png';
 
 
 
@@ -83,7 +83,7 @@ function extractdept(roll) {
 //----------------------------------------------------
 
 
-export default function AdDescPage(props) {
+export default function AdDescPage() {
   const location = useLocation();
   const AdId = location.pathname.split('/')[2];
 

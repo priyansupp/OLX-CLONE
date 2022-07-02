@@ -1,6 +1,6 @@
 export const msalConfig = {
     auth: {
-      clientId: "1202a425-bb3c-4141-ace6-f1b7b67b5730",
+      clientId: process.env.REACT_APP_CLIENTID,
       authority: "https://login.microsoftonline.com/common", // This is a URL (e.g. https://login.microsoftonline.com/{your tenant ID})
       redirectUri: "http://localhost:3000",
     },

@@ -1,6 +1,5 @@
-import { useState } from 'react';
 import classes from './Login.module.css'
-import login from '../../assests/login.png'
+import login from '../../assets/login.png'
 import { useMsal } from "@azure/msal-react";
 import { loginRequest } from "../../configs/authConfigs";
 

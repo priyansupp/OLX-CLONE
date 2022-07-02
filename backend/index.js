@@ -20,7 +20,7 @@ app.use(cors({
 
 
 // connnect to database
-mongoose.connect('mongodb://127.0.0.1:27017', 
+mongoose.connect(`mongodb+srv://${process.env.MONGO_USERNAME}:${process.env.MONGO_PASS}@cluster0.ir1vrth.mongodb.net/?retryWrites=true&w=majority`, 
     {
         useNewUrlParser: true,
         useUnifiedTopology: true
@@ -29,15 +29,6 @@ mongoose.connect('mongodb://127.0.0.1:27017',
         console.log("Connected to database");
     }
 );
-
-
-
-
-// mongo atlas - backend thing, olxclone:
-// priyanshu - sbcJc1grisHQjVFn
-// yash - KuKew5KGqKLmDD3f
-// mongodb+srv://<username>:<password>@cluster0.ir1vrth.mongodb.net/?retryWrites=true&w=majority
-
 
 
 // static files

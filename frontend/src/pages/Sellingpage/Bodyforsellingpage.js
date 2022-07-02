@@ -1,5 +1,4 @@
 import classes from './Bodyforsellingpage.module.css';
-import logo from '../../assests/Logo.png';
 import { useContext, useState } from 'react';
 import { UserIdContext } from '../../contexts/UserIdContext';
 import { useNavigate } from 'react-router-dom';
