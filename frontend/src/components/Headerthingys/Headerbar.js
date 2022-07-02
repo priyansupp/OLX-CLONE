@@ -5,7 +5,7 @@ import logo from "../../assests/Logo.png";
 import search from "../../assests/SearchIcon.png";
 import plus from "../../assests/plus.png";
 import Profile from "../Profilethingys/Profile";
-import { useContext, useEffect, useState } from 'react';
+import { useContext, useState } from 'react';
 import { useIsAuthenticated } from "@azure/msal-react";
 import { AuthenticatedTemplate, UnauthenticatedTemplate, useMsal } from "@azure/msal-react";
 import { loginRequest } from "../../configs/authConfigs";
@@ -52,10 +52,10 @@ function ProfileContent() {
 const Headerbar = () => {
 	const isAuthenticated = useIsAuthenticated();
 
-	const {queryName, setQueryName} = useContext(QueryNameContext);
-	const {queryHostel, setQueryHostel} = useContext(QueryHostelContext);
-	console.log("Query name is ", queryName);
-	console.log("Query hostel is ", queryHostel);
+	const {setQueryName} = useContext(QueryNameContext);
+	const {setQueryHostel} = useContext(QueryHostelContext);
+	// console.log("Query name is ", queryName);
+	// console.log("Query hostel is ", queryHostel);
 
 	return (
 		<div className={classes.header}>
