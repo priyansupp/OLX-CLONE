@@ -145,7 +145,7 @@ function SignUpPage(props) {
                         </div>
                     </form>
                 </div>
-                <div>
+                <div clssName={classes.buttons}>
                     <button type='submit' onClick={formik.handleSubmit} className={classes.btn}>Sign Up</button>
                     <button type='reset' onClick={formik.handleReset} className={classes.btn}>Reset</button>
                 </div>

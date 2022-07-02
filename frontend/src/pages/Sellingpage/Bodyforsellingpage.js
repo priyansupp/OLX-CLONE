@@ -80,7 +80,7 @@ const Bodyforsellingpage = () => {
             </p>
             <div>
                 <form className={classes.form} encType='multipart/form-data' onSubmit={submitHandler}>
-                    <div>
+                    <div className={classes.category}>
                         <label htmlFor='Category'>Choose Category : </label>
                         <input
                             className={classes.input}
@@ -99,7 +99,7 @@ const Bodyforsellingpage = () => {
                             <option value="Others">Others(please specify)</option>
                         </datalist>
                     </div>
-                    <div>
+                    <div className={classes.pro_name}>
                         <label htmlFor='Name'>Product Name : </label>
                         <input
                             className={classes.input}
@@ -108,11 +108,10 @@ const Bodyforsellingpage = () => {
                             id='Name'
                             required
                             onChange={onChangehandler}
-                            data-max-words="2"
                             value={values.pro_name} />
                     </div>
-                    <div>
-                        <label htmlFor='Price'>Price : ₹</label>
+                    <div className={classes.price}>
+                        <label htmlFor='Price'>Price : </label>
                         <input
                             className={classes.input}
                             type='number'
@@ -123,7 +122,7 @@ const Bodyforsellingpage = () => {
                             onChange={onChangehandler}
                             value={values.price} />
                     </div>
-                    <div>
+                    <div className={classes.date}>
                         <label htmlFor='Date'>Purchase Date : </label>
                         <input
                             className={classes.input}
@@ -134,7 +133,7 @@ const Bodyforsellingpage = () => {
                             onChange={onChangehandler}
                             value={values.dateOfBuying} />
                     </div>
-                    <div>
+                    <div className={classes.upload}>
                         <label htmlFor='myfile'>Upload Photo : </label>
                         <input
                             className={classes.input}
@@ -145,7 +144,7 @@ const Bodyforsellingpage = () => {
                             required
                         />
                     </div>
-                    <div>
+                    <div className={classes.hostel}>
                         <label htmlFor='hostel'>Select your hostel : </label>
                         <select
                             className={classes.input}
@@ -170,15 +169,13 @@ const Bodyforsellingpage = () => {
                     <div>
                         <label htmlFor='description'></label>
                         <textarea
-                            rows='10'
-                            cols='70'
                             placeholder='Briefly describe your product...'
                             required id='description'
                             name='description'
                             onChange={onChangehandler}
                             value={values.description}></textarea>
                     </div>
-                    <div>
+                    <div className={classes.nego}>
                         <input
                             className={classes.input}
                             type='checkbox'
@@ -188,7 +185,7 @@ const Bodyforsellingpage = () => {
                             value={values.negotiable} />
                         <label htmlFor='Negotiation'> Negotiable</label>
                     </div>
-                    <div>
+                    <div className={classes.buttons}>
                         <button className={classes.reset} type='reset' id="resetbtn" onClick={Handlereset}>Reset</button>
                         <button className={classes.submit} type='submit' onClick={submitHandler}>PostAd</button>
                     </div>
