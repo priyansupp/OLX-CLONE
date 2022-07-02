@@ -39,9 +39,14 @@
 .pro_name{
     position: absolute;
     bottom: 22px;
-    right: 20px;
+    right: 0px;
     color: black;
     font-size: 31px;
+    left: 130px;
+    overflow-x: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    /* width: 50%; */
 }
 
 .desc{

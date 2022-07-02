@@ -17,7 +17,7 @@ const Login = () => {
     return (
         <button onClick={() => handleLogin(instance)} className={classes.login}>
             <strong>
-                <span>Microsoft</span>
+                <span>Login</span>
                 <img src={login} />
             </strong>
         </button>
