@@ -36,10 +36,9 @@ function ProfileContent() {
             });
         });
     }
-
     return (
         <>
-            <h5 className="card-title">Welcome {name}</h5>
+            {/* <h5 className="card-title">Hello {name}</h5> */}
             {graphData ? 
                 <ProfileData graphData={graphData} />
                 :
@@ -71,7 +70,7 @@ const Headerbar = () => {
 							className={classes.hostelbox}
 							list="locations"
 							id="hostel-locations"
-							placeholder="Search for hostels within IITG"
+							placeholder="Search within a hostel..."
 							onChange={e => setQueryHostel(e.target.value)}
 						/>
 						<datalist id="locations">
@@ -96,7 +95,7 @@ const Headerbar = () => {
 							className={classes.searchbarbox}
 							type='text'
 							id="item-names"
-							placeholder="Search by name for Phones, Books and more..."
+							placeholder="Search any product by name..."
 							onChange={e => setQueryName(e.target.value)}
 						/>
 						<button onClick={e => e.preventDefault()} type='button'>
@@ -104,11 +103,11 @@ const Headerbar = () => {
 						</button>
 					</form>
 				</div>
-				<AuthenticatedTemplate>
+				{/* <AuthenticatedTemplate>
 					<ProfileContent />
-				</AuthenticatedTemplate>
+				</AuthenticatedTemplate> */}
 				<AuthenticatedTemplate>
-					<Profile />
+					 <Profile />
 				</AuthenticatedTemplate>
 				<div className={classes.log_prof_button}>
 					{isAuthenticated ? null : <Login />}
@@ -131,12 +130,12 @@ const Headerbar = () => {
 					</>
 				)}
 			</div>
-			<AuthenticatedTemplate>
+			{/* <AuthenticatedTemplate>
 				<p>You are signed in!</p>
 			</AuthenticatedTemplate>
 			<UnauthenticatedTemplate>
 				<p>You are not signed in! Please sign in.</p>
-			</UnauthenticatedTemplate>
+			</UnauthenticatedTemplate> */}
 		</div>
 	);
 };

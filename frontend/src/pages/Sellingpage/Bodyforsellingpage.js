@@ -7,7 +7,7 @@ import axios from 'axios';
 
 const Bodyforsellingpage = () => {
 
-    const {userId} = useContext(UserIdContext);
+    const { userId } = useContext(UserIdContext);
 
     const navigate = useNavigate();
 
@@ -44,7 +44,7 @@ const Bodyforsellingpage = () => {
         e.preventDefault();
         console.log(values);
 
-        if(pro_image) {
+        if (pro_image) {
             const data = new FormData();
             const filename = Date.now() + pro_image.name;
             data.append("name", filename);
@@ -52,13 +52,13 @@ const Bodyforsellingpage = () => {
             values.photo = filename;
             try {
                 await axios.post('http://localhost:4000/ad-api/upload', data);
-            } catch(err) {
+            } catch (err) {
                 console.log("error in uploading file");
             }
         }
         try {
             const res = await axios.post('http://localhost:4000/ad-api/postAd', values);
-        } catch(err) {
+        } catch (err) {
             console.log("error uploading text inputs");
         };
 
@@ -67,17 +67,14 @@ const Bodyforsellingpage = () => {
         navigate("/profile-page");
     }
 
-    function Handlereset(){
-        if(window.confirm("Are you sure you want to Reset?")){
+    function Handlereset() {
+        if (window.confirm("Are you sure you want to Reset?")) {
             setValues(initialValues);
         }
     };
 
     return (
         <div className={classes.main}>
-            <div className={classes.image}>
-                <img src={logo} width={50} height={50} alt="logo"/>
-            </div>
             <p className={classes.title}>
                 Post Your Ad
             </p>
@@ -85,14 +82,14 @@ const Bodyforsellingpage = () => {
                 <form className={classes.form} encType='multipart/form-data' onSubmit={submitHandler}>
                     <div>
                         <label htmlFor='Category'>Choose Category : </label>
-                        <input 
-                        className={classes.input} 
-                        list='categories' 
-                        id='Category' 
-                        name='category' 
-                        required 
-                        onChange={onChangehandler}
-                        value={values.category}/>
+                        <input
+                            className={classes.input}
+                            list='categories'
+                            id='Category'
+                            name='category'
+                            required
+                            onChange={onChangehandler} 
+                            value={values.category} />
                         <datalist id='categories'>
                             <option value="Mobiles">Mobile Phones</option>
                             <option value="Laptops">Laptops of all type</option>
@@ -104,47 +101,48 @@ const Bodyforsellingpage = () => {
                     </div>
                     <div>
                         <label htmlFor='Name'>Product Name : </label>
-                        <input 
-                        className={classes.input} 
-                        type='text' 
-                        name='pro_name' 
-                        id='Name' 
-                        required 
-                        onChange={onChangehandler}
-                        value={values.pro_name}/>
+                        <input
+                            className={classes.input}
+                            type='text'
+                            name='pro_name'
+                            id='Name'
+                            required
+                            onChange={onChangehandler}
+                            data-max-words="2"
+                            value={values.pro_name} />
                     </div>
                     <div>
                         <label htmlFor='Price'>Price : ₹</label>
-                        <input 
-                        className={classes.input} 
-                        type='number' 
-                        id='Price' 
-                        name='price' 
-                        required 
-                        min='1'
-                        onChange={onChangehandler}
-                        value={values.price} />
+                        <input
+                            className={classes.input}
+                            type='number'
+                            id='Price'
+                            name='price'
+                            required
+                            min='1'
+                            onChange={onChangehandler}
+                            value={values.price} />
                     </div>
                     <div>
-                        <label htmlFor='Date'>Date of Buying</label>
-                        <input 
-                        className={classes.input} 
-                        type='date' 
-                        id='Date' 
-                        name='dateOfBuying' 
-                        required
-                        onChange={onChangehandler}
-                        value={values.dateOfBuying}/>
+                        <label htmlFor='Date'>Purchase Date : </label>
+                        <input
+                            className={classes.input}
+                            type='date'
+                            id='Date'
+                            name='dateOfBuying'
+                            required
+                            onChange={onChangehandler}
+                            value={values.dateOfBuying} />
                     </div>
                     <div>
                         <label htmlFor='myfile'>Upload Photo : </label>
-                        <input 
-                        className={classes.input} 
-                        type='file' 
-                        id='myfile' 
-                        name='pro_image' 
-                        onChange={(e) => setPro_image(e.target.files[0])}
-                        required
+                        <input
+                            className={classes.input}
+                            type='file'
+                            id='myfile'
+                            name='pro_image'
+                            onChange={(e) => setPro_image(e.target.files[0])}
+                            required
                         />
                     </div>
                     <div>
@@ -170,35 +168,34 @@ const Bodyforsellingpage = () => {
                         </select>
                     </div>
                     <div>
-                        <label htmlFor='description'>Product Description : </label>
-                        <textarea 
-                        rows='10' 
-                        cols='30' 
-                        placeholder='Briefly describe your product...' 
-                        required id='description' 
-                        name='description'
-                        onChange={onChangehandler}
-                        value={values.description}></textarea>
+                        <label htmlFor='description'></label>
+                        <textarea
+                            rows='10'
+                            cols='70'
+                            placeholder='Briefly describe your product...'
+                            required id='description'
+                            name='description'
+                            onChange={onChangehandler}
+                            value={values.description}></textarea>
                     </div>
                     <div>
-                        <input 
-                        className={classes.input} 
-                        type='checkbox' 
-                        id='Negotiation' 
-                        name='negotiable'
-                        onChange={onChangehandler}
-                        value={values.negotiable}/>
+                        <input
+                            className={classes.input}
+                            type='checkbox'
+                            id='Negotiation'
+                            name='negotiable'
+                            onChange={onChangehandler}
+                            value={values.negotiable} />
                         <label htmlFor='Negotiation'> Negotiable</label>
                     </div>
                     <div>
                         <button className={classes.reset} type='reset' id="resetbtn" onClick={Handlereset}>Reset</button>
                         <button className={classes.submit} type='submit' onClick={submitHandler}>PostAd</button>
                     </div>
-                    
                 </form>
             </div>
         </div>
     );
 }
- 
+
 export default Bodyforsellingpage;
