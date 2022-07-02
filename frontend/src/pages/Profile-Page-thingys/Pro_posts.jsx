@@ -61,13 +61,6 @@ export default function Pro_posts(props) {
     }
 
 
-    // let date = takeoutdate(props.post.dateOfBuying);
-    // let postdate = takeoutdate(props.post.createdAt);
-
-    /*Fuction to add commas in the price */
-    // let new_price = props.post.price.toLocaleString("en-US");
-
-
     return (
         <div className={classes.body}>
             {!deleted ? 
@@ -91,16 +84,4 @@ export default function Pro_posts(props) {
         </div>
     )
 }
-
-
-// Pro_posts.defaultProps = {
-//     pro_image: "https://cdn.dribbble.com/users/1787778/screenshots/3713333/media/a684905500dc9268e81c03a8a7ad6e09.png?compress=1&resize=800x600&vertical=top",
-//     price: '5,00,000',
-//     dateOfBuying: 'March, 2021',
-//     pro_name: 'Holy-Shit',
-//     hostel: 'Siang',
-//     createdAt: 'June 2022',
-//     description: 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Deserunt laudantium nobis adipisci? Officiis velit at, tempore molestiae a sit, sint, iusto porro dolore unde temporibus voluptates neque atque deserunt dolorum labore quos corporis asperiores consequatur? Nemo molestiae cumque blanditiis libero ipsum nesciunt amet, culpa enim modi? Beatae impedit autem, nostrum officiis eius dolores numquam maxime tenetur aut labore. Maiores, error. ',
-// };
-
 

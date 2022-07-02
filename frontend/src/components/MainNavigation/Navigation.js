@@ -1,6 +1,5 @@
 import { Route, Routes } from "react-router-dom";
 import Postad from "../../pages/Sellingpage/Postad";
-import SignupPage from "../../pages/SignUpPage";
 import React from 'react';
 import HomePage from "../../pages/HomePage";
 import AdDescPage from "../../pages/Ad Page/AdDescPage";
@@ -15,7 +14,6 @@ const Navigation = () => {
 				</Route>
 				<Route path="/" element={<HomePage />} />
 				<Route path="/ads/post-ad" element={<Postad />} />
-				<Route path="/signup" element={<SignupPage />} />
 				<Route path="/profile-page" element={<ProfilePage />} />
 			</Routes>
 		</>

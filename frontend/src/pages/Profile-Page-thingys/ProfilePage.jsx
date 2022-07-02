@@ -1,8 +1,8 @@
 import classes from './ProfilePage.module.css'
-import logo from "../../assests/Logo.png";
+import logo from "../../assets/Logo.png";
 import { Link } from "react-router-dom";
 import Pro_posts from './Pro_posts';
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext } from "react";
 import { UserIdContext } from "../../contexts/UserIdContext";
 import { useQuery } from 'react-query';
 
@@ -53,10 +53,3 @@ export default function ProfilePage(props) {
     );
 }
 
-
-// profilePage.defaultProps = {
-//     name: 'Yash Kumar Malik',
-//     roll: '200123072',
-//     mail: 'y.malik@iitg.ac.in',
-//     course: 'B.Tech.'
-// };

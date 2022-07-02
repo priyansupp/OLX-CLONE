@@ -79,12 +79,3 @@ export default function PostCard(props) {
 };
 
 
-PostCard.defaultProps ={
-    pro_image: "https://cdn.dribbble.com/users/1787778/screenshots/3713333/media/a684905500dc9268e81c03a8a7ad6e09.png?compress=1&resize=800x600&vertical=top",
-    price:'₹5,00,000',
-    dateOfBuying:'March, 2021',
-    pro_name:'Holy-Shit',
-    desc:'This is a post for sale',
-    hostel:'Siang'
-};
-

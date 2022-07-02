@@ -1,52 +1,17 @@
 import Login from "../Loginthingys/Login";
 import classes from "./Headerthingys.module.css";
 import { Link } from "react-router-dom";
-import logo from "../../assests/Logo.png";
-import search from "../../assests/SearchIcon.png";
-import plus from "../../assests/plus.png";
+import logo from "../../assets/Logo.png";
+import search from "../../assets/SearchIcon.png";
+import plus from "../../assets/plus.png";
 import Profile from "../Profilethingys/Profile";
-import { useContext, useState } from 'react';
+import { useContext } from 'react';
 import { useIsAuthenticated } from "@azure/msal-react";
-import { AuthenticatedTemplate, UnauthenticatedTemplate, useMsal } from "@azure/msal-react";
-import { loginRequest } from "../../configs/authConfigs";
-import { ProfileData } from "../Loginthingys/ProfileData";
-import { callMsGraph } from "../Loginthingys/graph";
+import { AuthenticatedTemplate } from "@azure/msal-react";
 import { QueryNameContext } from "../../contexts/QueryNameContext";
 import { QueryHostelContext } from "../../contexts/QueryHostelContext";
+import ProfileContent from "./ProfileContent";
 
-
-function ProfileContent() {
-    const { instance, accounts } = useMsal();
-    const [graphData, setGraphData] = useState(null);
-
-    const name = accounts[0] && accounts[0].name;
-
-    function RequestProfileData() {
-        const request = {
-            ...loginRequest,
-            account: accounts[0]
-        };
-
-        // Silently acquires an access token which is then attached to a request for Microsoft Graph data
-        instance.acquireTokenSilent(request).then((response) => {
-            callMsGraph(response.accessToken).then(response => setGraphData(response));
-        }).catch((e) => {
-            instance.acquireTokenPopup(request).then((response) => {
-                callMsGraph(response.accessToken).then(response => setGraphData(response));
-            });
-        });
-    }
-    return (
-        <>
-            {/* <h5 className="card-title">Hello {name}</h5> */}
-            {graphData ? 
-                <ProfileData graphData={graphData} />
-                :
-                RequestProfileData()
-            }
-        </>
-    );
-};
 
 const Headerbar = () => {
 	const isAuthenticated = useIsAuthenticated();
@@ -96,16 +61,16 @@ const Headerbar = () => {
 							type='text'
 							id="item-names"
 							placeholder="Search any product by name..."
-							onChange={e => setQueryName(e.target.value)}
+							onChange={e => setQueryName(e.target.value.toLowerCase())}
 						/>
 						<button onClick={e => e.preventDefault()} type='button'>
 							<img src={search} alt="search" />
 						</button>
 					</form>
 				</div>
-				{/* <AuthenticatedTemplate>
+				<AuthenticatedTemplate>
 					<ProfileContent />
-				</AuthenticatedTemplate> */}
+				</AuthenticatedTemplate>
 				<AuthenticatedTemplate>
 					 <Profile />
 				</AuthenticatedTemplate>
@@ -130,12 +95,6 @@ const Headerbar = () => {
 					</>
 				)}
 			</div>
-			{/* <AuthenticatedTemplate>
-				<p>You are signed in!</p>
-			</AuthenticatedTemplate>
-			<UnauthenticatedTemplate>
-				<p>You are not signed in! Please sign in.</p>
-			</UnauthenticatedTemplate> */}
 		</div>
 	);
 };
