@@ -137,17 +137,9 @@ export default function AdDescPage(props) {
   /*---Extract Information from Roll No. */
   let dept;
   let enrolled_year;
-  let program;
   if (seller && seller.roll_no) {
     dept = extractdept(seller.roll_no);
     enrolled_year = seller.roll_no.toString().substring(0, 2);
-    let temp = seller.roll_no.toString().substring(2, 4);
-    if (temp == "01") {
-      program = "B.Tech";
-    }
-    else {
-      program = "Non-B.Tech";
-    }
   }
 
   return (
@@ -208,7 +200,7 @@ export default function AdDescPage(props) {
               {seller && seller.email} <br />
               Department : {dept} <br />
               Year Enrolled : 20{enrolled_year} <br />
-              Program : {program}
+              Program : {seller && seller.program}
             </p>
           </div>
         </div>
