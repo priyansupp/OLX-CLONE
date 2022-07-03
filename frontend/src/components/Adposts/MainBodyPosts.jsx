@@ -57,7 +57,7 @@ export default function MainBodyPosts(props) {
 		};
 		fetchPosts();
 	}, [props.category, props.filter.sort]);
-
+	// https://olx-iitg-backend.herokuapp.com/ad-api/getAds/sort/clear
 	return (
 		<div className={classes.Supreme}>
 			<p className={classes.para}>Fresh Recomendations</p>
@@ -72,7 +72,7 @@ export default function MainBodyPosts(props) {
 						.filter((post) => post.pro_name.toLowerCase().includes(queryName)) // to filter out with name of product searched
 						.filter((post) => post.hostel.includes(queryHostel))               // to filter out with location/hostel searched
 						.map((post) => <PostCard post={post} key={post._id} />)}
-				{posts ? null : <div>No Ads in this category</div>}
+				{posts ? null : <div className={classes.none}>No Ads in this category</div>}
 			</div>
 		</div>
 	);
