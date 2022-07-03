@@ -6,8 +6,6 @@ const path = require('path');
 const authRoutes = require('./routes/authRoutes');
 const adApiRoutes = require('./routes/adApiRoutes');
 const cors = require('cors');
-const session = require('express-session');
-const passport = require('passport');
 
 
 // set up express app
@@ -22,23 +20,19 @@ app.use(cors({
 
 
 // connnect to database
-mongoose.connect('mongodb://127.0.0.1:27017', 
+mongoose.connect(`mongodb+srv://${process.env.MONGO_USERNAME}:${process.env.MONGO_PASS}@cluster0.ir1vrth.mongodb.net/?retryWrites=true&w=majority`, 
     {
-        useNewUrlParser: true, useUnifiedTopology: true
+        useNewUrlParser: true,
+        useUnifiedTopology: true
     },
     () => {
         console.log("Connected to database");
     }
 );
 
-// mongo atlas - backend thing, olxclone:
-// priyanshu - sbcJc1grisHQjVFn
-// yash - KuKew5KGqKLmDD3f
-// mongodb+srv://<username>:<password>@cluster0.ir1vrth.mongodb.net/?retryWrites=true&w=majority
-
-
 
 // static files
+app.use('/images', express.static(path.join(__dirname, '/images')));
 
 
 // using a middleware
@@ -53,7 +47,6 @@ app.use((req, res, next) => {
 })
 
 
-// http://localhost:4000/ad-api/getAds/category/mobiles
 // get requests
 // app.get('/', (req, res) => {
 //     res.json({message: 'Welcome to olxclone app'});

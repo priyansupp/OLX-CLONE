@@ -1,6 +1,5 @@
-import { useState } from 'react';
 import classes from './Login.module.css'
-import login from '../../assests/login.png'
+import login from '../../assets/login.png'
 import { useMsal } from "@azure/msal-react";
 import { loginRequest } from "../../configs/authConfigs";
 
@@ -10,14 +9,14 @@ function handleLogin(instance) {
     });
 }
 
-const Login = (props) => {
+const Login = () => {
 
     const { instance } = useMsal();
 
     return (
         <button onClick={() => handleLogin(instance)} className={classes.login}>
             <strong>
-                <span>Microsoft</span>
+                <span>Login</span>
                 <img src={login} />
             </strong>
         </button>

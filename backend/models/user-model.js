@@ -33,6 +33,10 @@ const userSchema = new Schema({
     profile_pic: {
         data: Buffer,
         contentType: String
+    },
+    program: {
+        type: String,
+        require: [true, 'Program is required.']
     }
 });
 

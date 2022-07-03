@@ -1,15 +1,15 @@
 import React from 'react';
 import classes from './AdDescPage.module.css'
-import logo from "../../assests/Logo.png";
+import logo from "../../assets/Logo.png";
+import locate from '../../assets/location.png';
 import { useLocation } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { Link } from "react-router-dom";
-import locate from '../../assests/location.png';
-
 
 
 
 function extractdate(date) {
+  if (!date) return;
   let temp = date.toString();
   let year = parseInt(temp.substring(0, 4));
   let month = parseInt(temp.substring(5, 7));
@@ -46,31 +46,67 @@ function extractdate(date) {
   return ans;
 }
 
-function dateFromObject(idd) {
-  let ans = Date(parseInt(idd.substring(0, 8), 16) * 1000);
-  let year = ans.substring(11, 16);
-  let date = ans.substring(8, 10);
-  let month = ans.substring(4, 7);
-  return date + " " + month + " " + year;
+
+function extractdept(roll) {
+  let temp = roll.toString();
+  let ans;
+  switch (temp.substring(4, 6)) {
+    case "01": ans = "CSE";
+      break;
+    case "02": ans = "ECE";
+      break;
+    case "03": ans = "ME";
+      break;
+    case "04": ans = "CE";
+      break;
+    case "05": ans = "DD";
+      break;
+    case "06": ans = "BSBE";
+      break;
+    case "07": ans = "CL";
+      break;
+    case "08": ans = "EEE";
+      break;
+    case "21": ans = "EPH";
+      break;
+    case "22": ans = "CST";
+      break;
+    case "23": ans = "M&C";
+      break;
+    default: ans = "-";
+      break;
+  }
+  return ans;
 }
+
 
 //----------------------------------------------------
 
 
-export default function AdDescPage(props) {
+export default function AdDescPage() {
   const location = useLocation();
   const AdId = location.pathname.split('/')[2];
 
   const [post, setPost] = useState(null);
+  const [seller, setSeller] = useState(null);
 
   useEffect(() => {
     const fetchPost = async () => {
       const response1 = await fetch('http://localhost:4000/ad-api/getAds/id/' + AdId);
       const thatPost = await response1.json();
       setPost(thatPost);
+
+      const SellerId = thatPost.sellerId;
+      const response2 = await fetch('http://localhost:4000/auth/getSeller/sellerId/' + SellerId);
+      const thatSeller = await response2.json();
+      setSeller(thatSeller);
+
     }
     fetchPost();
+
   }, [AdId]);
+
+
 
   /*Function to format date in nicer format */
   let new_date;
@@ -98,12 +134,27 @@ export default function AdDescPage(props) {
     new_price = "error while loading date";
   }
 
+  /*---Extract Information from Roll No. */
+  let dept;
+  let enrolled_year;
+  let program;
+  if (seller && seller.roll_no) {
+    dept = extractdept(seller.roll_no);
+    enrolled_year = seller.roll_no.toString().substring(0, 2);
+    let temp = seller.roll_no.toString().substring(2, 4);
+    if (temp == "01") {
+      program = "B.Tech";
+    }
+    else {
+      program = "Non-B.Tech";
+    }
+  }
 
   return (
     <div>
       <div className={classes.headbar}>
         <Link to="/">
-          <img src={logo} />
+          <img src={logo} alt="logo" />
         </Link>
       </div>
       <div className={classes.body}>
@@ -111,13 +162,14 @@ export default function AdDescPage(props) {
 
           <div className={classes.pro_image}>
             {/* {post && post.pro_image} */}
-            <img src="https://images.unsplash.com/photo-1588627541420-fce3f661b779?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxleHBsb3JlLWZlZWR8NXx8fGVufDB8fHx8&w=1000&q=80" />
+            {post && <img src={'http://localhost:4000/images/' + post.photo} alt="post" />}
+
           </div>
           <hr />
           <p className={classes.pro_name}>{post && post.pro_name}</p>
 
           <hr className={classes.hr} />
-          
+
           <p className={classes.descriptionHead}>Description</p>
           <p className={classes.description}>{post && post.description}</p>
 
@@ -130,14 +182,14 @@ export default function AdDescPage(props) {
         </div>
 
 
-{/*-------------Right Column----------------*/}
+        {/*-------------Right Column----------------*/}
         <div className={classes.rightColumn}>
           <div className={classes.aboutAd}>
 
             <p className={classes.price}>&#8377; {new_price}</p>
 
-            {(post && post.negotiable) ? <p className={classes.nego}>It is negotiable </p> : <p className={classes.notNego}>It is <b>not</b> negotiable</p>}
-            <span className={classes.hostel}><img src={locate}></img><p className={classes.hostelName}>{post && post.hostel}</p> </span>
+            {(post && post.negotiable) ? <p className={classes.nego}>It is negotiable </p> : <p className={classes.notNego}>It is <b>non</b>-negotiable</p>}
+            <span className={classes.hostel}><img src={locate} alt="location logo"></img><p className={classes.hostelName}>{post && post.hostel}</p> </span>
 
             <p className={classes.postDate}>Ad was posted on <i>{post_date}</i> </p>
 
@@ -147,10 +199,18 @@ export default function AdDescPage(props) {
 
           {/* ----------  About Seller -------- */}
           <div className={classes.aboutSeller}>
-            <div className={classes.temporary}> {/*about seller part is just for understanding purpose. change it according to your need */}
+            <div className={classes.temporary}>
               Seller Info
+              <hr />
             </div>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Omnis tempora quasi magni mollitia animi exercitationem illo error impedit, quis perspiciatis iusto, sint nisi? Eius nobis ad voluptate eligendi, impedit modi, voluptatum quasi debitis perferendis quisquam dicta molestias molestiae ab commodi quos possimus unde doloribus obcaecati a repudiandae officiis assumenda. Explicabo voluptatem praesentium temporibus eligendi quas quisquam, sint obcaecati quos voluptas!
+            <p>
+              {seller && seller.Name} <br />
+              <i className="fa fa-envelope"></i> &nbsp;
+              {seller && seller.email} <br />
+              Department : {dept} <br />
+              Year Enrolled : 20{enrolled_year} <br />
+              Program : {program}
+            </p>
           </div>
         </div>
 

@@ -7,6 +7,22 @@
     align-items: center;
     display: flex;
     justify-content: center;
-    background-color: rgba(1, 43, 160, 0.503);
+    /* background-color: rgba(1, 43, 160, 0.503); */
     height: 96px;
 }
+
+.background{
+    z-index: -1;
+    position: absolute;
+    width: 100%;
+    object-fit: cover;
+    max-height: 1045px;
+}
+
+
+@media only screen and (max-width: 856px) {
+    .background {
+      max-width: 100%;
+      visibility: hidden;
+    }
+   }

@@ -1,23 +1,19 @@
 import { Route, Routes } from "react-router-dom";
 import Postad from "../../pages/Sellingpage/Postad";
-import SignupPage from "../../pages/SignUpPage";
 import React from 'react';
 import HomePage from "../../pages/HomePage";
 import AdDescPage from "../../pages/Ad Page/AdDescPage";
-import ProfilePage from "../../pages/Profile Page/profilePage";
+import ProfilePage from "../../pages/Profile-Page-thingys/ProfilePage";
 
 const Navigation = () => {
-	const user = false;
 	return (
 		<>
 			<Routes>
 				<Route path="/ads">
 					<Route path=":id" element={<AdDescPage />} />
 				</Route>
-				<Route path="/" element={<HomePage user={user} />} />
+				<Route path="/" element={<HomePage />} />
 				<Route path="/ads/post-ad" element={<Postad />} />
-				<Route path="/login" element={user ? <HomePage user={user} /> : <HomePage user={!user} />} />
-				<Route path="/signup" element={<SignupPage />} />
 				<Route path="/profile-page" element={<ProfilePage />} />
 			</Routes>
 		</>

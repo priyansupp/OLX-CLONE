@@ -31,13 +31,14 @@ const postSchema = new Schema({
         type: Boolean,
         require: [true, 'Negotiable or not?']
     },
-    pro_image: {
-        data: Buffer,
-        contentType: String
+    sellerId: {
+        type: String,
+        require: [true, 'Seller Id is required']
     },
-},
-{timestamps: true}
-);
+    photo: {
+        type: String
+    }
+}, {timestamps: true});
 
 // creates a model/collection with the name 'posts' by pluralising the first parameter. The 2nd parameter is the schema it should follow to create the collection.
 const Posts = mongoose.model('post', postSchema);
