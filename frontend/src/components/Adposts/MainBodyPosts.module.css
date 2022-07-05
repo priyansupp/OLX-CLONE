@@ -12,3 +12,10 @@
   font-size: 40px;
   color: rgb(69, 68, 68);
 }
+
+.none{
+  font-size: 3rem;
+  margin-bottom: 4rem;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  color: chocolate;
+}

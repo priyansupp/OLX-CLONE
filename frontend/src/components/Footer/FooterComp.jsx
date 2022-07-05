@@ -6,11 +6,8 @@ export default function FooterComp() {
     return (
         <div className={classes.FooterComp}>
             <div className={classes.left}>
-                <p className={classes.Head}> Customer Care</p>
+                <p className={classes.Head}> Help</p>
                 <p className={classes.body}>
-                    Phone : <br />
-                    9643763504 <br />
-                    9546358484 <br />
                     Email : <br />
                     priyanshujaiswal009@gmail.com <br />
                     yashmalik2711@gmail.com
@@ -25,9 +22,9 @@ export default function FooterComp() {
             <div className={classes.right}>
                 <p className={classes.Head}> Follow Us</p>
                 <p className={classes.body}>
-                    <a href='https://www.instagram.com'><i className="fa fa-instagram"> Instagram</i></a><br />
-                    <a href='https://www.facebook.com'><i className="fa fa-facebook"> Facebook</i></a><br />
-                    <a href='https://www.linkedin.com'><i className="fa fa-linkedin"> LinkedIn</i></a><br />
+                <i className="fa fa-instagram"> Instagram <a href='https://www.instagram.com/_yashmalik' target="_blank">1 </a><a href='https://www.instagram.com/priyansupp' target="_blank">2</a></i><br />
+                   <i className="fa fa-facebook"> Facebook <a href='https://www.facebook.com/yash.malik.3910?_rdr' target="_blank">1 </a><a href='https://www.facebook.com/priyanshu.jaiswal.1088?_rdr' target="_blank">2</a></i><br />
+                   <i className="fa fa-linkedin"> LinkedIn <a href='https://www.linkedin.com/in/yashkrmalik' target="_blank">1 </a><a href='https://www.linkedin.com/in/priyanshu-jaiswal-0a9622206' target="_blank">2</a></i><br />
                 </p>
             </div>
         </div>
