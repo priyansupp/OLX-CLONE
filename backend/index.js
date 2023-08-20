@@ -43,6 +43,7 @@ app.use(bodyParser.json());             // it's gonna parse the json data of inc
 // fires for every request
 app.use((req, res, next) => {
     console.log(req.url, req.method);
+    res.set('Access-Control-Allow-Origin', '*');
     next();
 })
 
